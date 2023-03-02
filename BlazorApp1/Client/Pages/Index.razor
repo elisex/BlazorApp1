@@ -1,0 +1,47 @@
+﻿@page "/"
+@page "/{categoryurl}"
+@inject IJSRuntime js
+@inject ICategoryService CategoryService
+@inject IProductService ProductService
+
+@if (category != null)
+{
+    <h1>Welcome to the @category.Name section!</h1>
+    <ProductList />
+}
+else
+{
+    <h1>Welcome to Global Motors!</h1>
+    <ProductList />
+}
+
+@code{
+    [Parameter]
+    public string CategoryUrl { get; set; }
+
+    private Category category = null;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await ProductService.LoadProducts(CategoryUrl);
+
+        if(CategoryUrl != null)
+        {
+            category = CategoryService.Categories.FirstOrDefault(c => c.Url.ToLower().Equals(CategoryUrl.ToLower()));
+        }
+        else
+        {
+            category = null;
+        }
+    }
+}
+
+@code {
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationState { get; set; }
+
+    private async Task DisplayGreetingAlert()
+    {
+        var authState = await authenticationState;
+    }
+}
