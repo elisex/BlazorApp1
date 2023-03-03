@@ -2,6 +2,7 @@
 @inject IProductService ProductService
 @inject ILocalStorageService LocalStorage
 @inject IToastService ToastService
+@inject NavigationManager NavigationManager
 
 <div class="media">
     <div class="media-img-big-wrapper mr-2">
@@ -74,11 +75,11 @@
         int selectedVariant = GetSelectedVariant().EditionId;
         if (selectedVariant == 2)
         {
-            ToastService.ShowSuccess("Well done Elise");
+            NavigationManager.NavigateTo("/buy");
         }
         else
         {
-            ToastService.ShowError("Why no work");
+            NavigationManager.NavigateTo("/finance");
         }
     }
 }
