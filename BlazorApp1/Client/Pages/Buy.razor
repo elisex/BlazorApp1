@@ -1,9 +1,28 @@
 ﻿@page "/buy"
+@inject ICartService CartService
 
-<PageTitle>Counter</PageTitle>
+<PageTitle>Buynow</PageTitle>
 
-<h1>BUY</h1>
+<h1>BUY NOW</h1>
+<div>
+    @foreach (var item in cartItems)
+    {
+        <div class="item-container">
+            <div class="item-image-wrapper"><img src="@item.Image" class="item-image"/></div>
+            <div class="item-name">
+                <h5>@item.ProductTitle</h5>
+                <span>@item.EditionName</span>
+            </div>
+            <div class="item-price">£@item.Price</div>
+        </div>
+    }
+</div>
 
 @code {
     List<CartItem> cartItems = new List<CartItem>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        cartItems = await CartService.GetCartItems();
+    }
 }

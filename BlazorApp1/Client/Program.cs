@@ -1,5 +1,6 @@
 using BlazorApp1.Client;
 using BlazorApp1.Client.Authentication;
+using BlazorApp1.Client.Services.CartService;
 using BlazorApp1.Client.Services.CategoryService;
 using BlazorApp1.Client.Services.ProductService;
 using Blazored.LocalStorage;
@@ -16,6 +17,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddOptions();
 builder.Services.AddBlazoredSessionStorage();

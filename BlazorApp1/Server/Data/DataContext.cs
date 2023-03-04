@@ -73,6 +73,7 @@ namespace BlazorApp1.Server.Data
                         EditionId = 2,
                         Price = 97990m,
                         OriginalPrice = 99000m,
+                        Quantity = 40
                     },
                     new ProductVariant
                     {
@@ -80,6 +81,7 @@ namespace BlazorApp1.Server.Data
                         EditionId = 3,
                         Price = 109990m,
                         OriginalPrice = 129990m,
+                        Quantity = 45
                     },
                     new ProductVariant
                     {
@@ -87,6 +89,7 @@ namespace BlazorApp1.Server.Data
                         EditionId = 2,
                         Price = 81700m,
                         OriginalPrice = 81700m,
+                        Quantity = 150
                     },
                     new ProductVariant
                     {
@@ -94,6 +97,7 @@ namespace BlazorApp1.Server.Data
                         EditionId = 3,
                         Price = 87110m,
                         OriginalPrice = 95000m,
+                        Quantity = 155
                     },
                     new ProductVariant
                     {
@@ -101,6 +105,7 @@ namespace BlazorApp1.Server.Data
                         EditionId = 2,
                         Price = 3100000m,
                         OriginalPrice = 3100000m,
+                        Quantity = 90
                     },
                     new ProductVariant
                     {
@@ -108,6 +113,7 @@ namespace BlazorApp1.Server.Data
                         EditionId = 3,
                         Price = 3600000m,
                         OriginalPrice = 3600000m,
+                        Quantity = 95
                     },
                     new ProductVariant
                     {
@@ -115,6 +121,7 @@ namespace BlazorApp1.Server.Data
                         EditionId = 2,
                         Price = 27.99m,
                         OriginalPrice = 30.99m,
+                        Quantity = 200
                     },
                     new ProductVariant
                     {
@@ -122,6 +129,7 @@ namespace BlazorApp1.Server.Data
                         EditionId = 3,
                         Price = 34.99m,
                         OriginalPrice = 40.99m,
+                        Quantity = 205
                     }
                 );
         }

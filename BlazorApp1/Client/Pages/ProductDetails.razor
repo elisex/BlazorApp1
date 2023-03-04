@@ -1,5 +1,9 @@
 ﻿@page "/product/{id:int}"
+@using System.Net.Http
+@using System.Threading.Tasks
+@inject HttpClient httpClient
 @inject IProductService ProductService
+@inject ICartService CartService
 @inject ILocalStorageService LocalStorage
 @inject IToastService ToastService
 @inject NavigationManager NavigationManager
@@ -67,11 +71,7 @@
 
     private async Task Decision()
     {
-        var cart = await LocalStorage.GetItemAsync<List<ProductVariant>>("cart");
-        cart = new List<ProductVariant>();
-        cart.Add(GetSelectedVariant());
-        await LocalStorage.SetItemAsync("cart", cart);
-
+        await CartService.AddToCart(GetSelectedVariant());
         int selectedVariant = GetSelectedVariant().EditionId;
         if (selectedVariant == 2)
         {

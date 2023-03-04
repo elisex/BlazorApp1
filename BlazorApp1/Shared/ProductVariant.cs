@@ -19,5 +19,6 @@ namespace BlazorApp1.Shared
         public decimal Price { get; set; }
         [Column(TypeName = "decimal(18,2)")]
         public decimal OriginalPrice { get; set; }
+        public int Quantity { get; set; }
     }
 }
