@@ -10,12 +10,17 @@
         <div class="item-container">
             <div class="item-image-wrapper"><img src="@item.Image" class="item-image"/></div>
             <div class="item-name">
-                <h5>@item.ProductTitle</h5>
-                <span>@item.EditionName</span>
+                <h5>Congratulations on your @item.ProductTitle purchase for £@item.Price!</h5>
+                <p>Due to your choice of buying now, you will need to go to your nearest dealer which will be shown below in order to confirm any neccessary paperwork.
+                </p>
+                <br />
+                <h3>Thank you again for choosing Global Motors</h3>
             </div>
-            <div class="item-price">£@item.Price</div>
         </div>
     }
+    <div style="text-align:center;">
+    <img src="map.png" />
+    </div>
 </div>
 
 @code {

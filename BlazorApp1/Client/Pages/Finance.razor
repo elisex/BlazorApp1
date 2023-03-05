@@ -1,5 +1,9 @@
 ﻿@page "/finance"
 @inject ICartService CartService
+@inject HttpClient httpClient
+@inject IToastService ToastService
+@inject IJSRuntime js
+@inject NavigationManager NavigationManager
 
 <PageTitle>Counter</PageTitle>
 
@@ -16,14 +20,61 @@
             </div>
             <div class="item-price">£@item.Price</div>
         </div>
+        <EditForm Model="@NewUser" OnValidSubmit="@HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <InputText id="firstName" class="form-control" @bind-Value="NewUser.FirstName" required/>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <InputText id="lastName" class="form-control" @bind-Value="NewUser.LastName" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <InputText id="email" class="form-control" @bind-Value="NewUser.Email" required />
+            </div>
+            <div class="form-group">
+                <label for="phoneNo">Phone Number:</label>
+                <InputText id="email" class="form-control" @bind-Value="NewUser.PhoneNo" required />
+            </div>
+            <label for="file-upload">Select PNG File:</label>
+            <InputFile id="file-upload" OnChange="@OnInputFileChange" />
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </EditForm>
     }
 </div>
 
 @code {
+    [CascadingParameter]
+    Task<AuthenticationState> authenticationState { get; set; }
+
     List<CartItem> cartItems = new List<CartItem>();
 
     protected override async Task OnInitializedAsync()
     {
         cartItems = await CartService.GetCartItems();
+        var authState = await authenticationState;
+        NewUser.UserName = authState.User.Identity.Name;
+    }
+
+    async Task OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        var format = "image/png";
+        var resizedImage = await e.File.RequestImageFileAsync(format,300,300);
+        var buffer = new byte[resizedImage.Size];
+        await resizedImage.OpenReadStream().ReadAsync(buffer);
+        var imageData = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
+        NewUser.Document = imageData;
+    }
+
+
+    public UserDetails NewUser { get; set; } = new UserDetails();
+
+    private async Task HandleValidSubmit()
+    {
+        var userdetails = await httpClient.PostAsJsonAsync<UserDetails>("/api/UserDetails", NewUser);
+        NavigationManager.NavigateTo("/thankyou/finance");
     }
 }

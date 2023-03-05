@@ -35,13 +35,3 @@ else
         }
     }
 }
-
-@code {
-    [CascadingParameter]
-    private Task<AuthenticationState> authenticationState { get; set; }
-
-    private async Task DisplayGreetingAlert()
-    {
-        var authState = await authenticationState;
-    }
-}

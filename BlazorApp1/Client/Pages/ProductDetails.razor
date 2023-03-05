@@ -1,41 +1,42 @@
 ﻿@page "/product/{id:int}"
 @using System.Net.Http
 @using System.Threading.Tasks
+@using Blazored.SessionStorage
 @inject HttpClient httpClient
 @inject IProductService ProductService
 @inject ICartService CartService
-@inject ILocalStorageService LocalStorage
 @inject IToastService ToastService
 @inject NavigationManager NavigationManager
 
-<div class="media">
-    <div class="media-img-big-wrapper mr-2">
+<div class="product-container">
+    <div class="image-container">
         <img class="media-img-big" src="@product.Image" alt="@product.Title" />
     </div>
-    <div class="media-body">
-        <h2 class="mb-0">@product.Title</h2>
-        <p>@product.Description</p>
-        @if (product.Variants != null && product.Variants.Count > 1)
-        {
-            <div class="form-group">
-                <select class="form-control" @bind="currentEditionId">
-                    @foreach (var variant in product.Variants)
-                    {
-                        <option value="@variant.EditionId">@variant.Edition.Name</option>
-                    }
-                </select>
-            </div>
-        }
-        @if (GetSelectedVariant() != null)
-        {
-            @if (GetSelectedVariant().OriginalPrice > GetSelectedVariant().Price)
+        <div class="product-details">
+            <h2 class="product-title">@product.Title</h2>
+            <br />
+            <p class="product-description">@product.Description</p>
+            @if (product.Variants != null && product.Variants.Count > 1)
             {
-                <h6 class="text-muted original-price">$@GetSelectedVariant().OriginalPrice</h6>
+                <div class="form-group">
+                    <select class="form-control" @bind="currentEditionId">
+                        @foreach (var variant in product.Variants)
+                        {
+                            <option value="@variant.EditionId">@variant.Edition.Name</option>
+                        }
+                    </select>
+                </div>
             }
-            <h4 class="price">
-                $@GetSelectedVariant().Price
-            </h4>
-        }
+            @if (GetSelectedVariant() != null)
+            {
+                @if (GetSelectedVariant().OriginalPrice > GetSelectedVariant().Price)
+                {
+                    <h6 class="text-muted original-price">$@GetSelectedVariant().OriginalPrice</h6>
+                }
+                <h4 class="product-price">
+                    $@GetSelectedVariant().Price
+                </h4>
+            }
         <AuthorizeView>
             <Authorized>
                 <button class="btn btn-primary" @onclick="Decision"><i class="oi oi-cart"></i>&nbsp;&nbsp;&nbsp;Add to Cart</button>

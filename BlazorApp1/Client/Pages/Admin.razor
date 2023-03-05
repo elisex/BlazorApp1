@@ -1,4 +1,4 @@
-﻿@page "/fetchdata"
+﻿@page "/admin"
 @attribute [Authorize(Roles = "Administrator")]
 @using BlazorApp1.Client.Authentication
 @using BlazorApp1.Shared
@@ -7,13 +7,13 @@
 @inject NavigationManager navManager
 @inject HttpClient Http
 
-<PageTitle>Weather forecast</PageTitle>
+<PageTitle>Admin module</PageTitle>
 
-<h1>Weather forecast</h1>
+<h1>ADMIN</h1>
 
 <p>This component demonstrates fetching data from the server.</p>
 
-@if (forecasts == null)
+@if (userdetails == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -22,20 +22,25 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>Username</th>
+                <th>Forename</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Phone No</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (var user in userdetails)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
+                    <td>@user.UserName</td>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Email</td>
+                    <td>@user.PhoneNo</td>
+                    @if(!string.IsNullOrEmpty(user.Document)){
+                        <a href="@user.Document" download="@user.UserName" class="buttonDownload">Download document</a>
+                    }
                 </tr>
             }
         </tbody>
@@ -43,7 +48,7 @@ else
 }
 
 @code {
-    private WeatherForecast[]? forecasts;
+    private UserDetails[]? userdetails;
 
     protected override async Task OnInitializedAsync()
     {
@@ -52,10 +57,9 @@ else
         if (!string.IsNullOrWhiteSpace(token))
         {
             Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
-            forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+            userdetails = await Http.GetFromJsonAsync<UserDetails[]>("/api/UserFile");
         }
         else
-            navManager.NavigateTo("/login");
-
+            navManager.NavigateTo("/");
     }
 }

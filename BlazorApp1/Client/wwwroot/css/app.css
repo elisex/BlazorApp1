@@ -54,7 +54,7 @@ a, .btn-link {
 }
 
 .media-img-big {
-    max-height: 800px;
+    max-height: 500px;
     max-width: 850px;
     border-radius: 6px;
     margin-bottom: 2px;

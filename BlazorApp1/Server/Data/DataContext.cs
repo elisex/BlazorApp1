@@ -13,6 +13,7 @@ namespace BlazorApp1.Server.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Edition> Editions { get; set; }
+        public DbSet<UserDetails> UserDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -46,8 +47,8 @@ namespace BlazorApp1.Server.Data
             {
                 Id = 3,
                 CategoryId = 2,
-                Title = "Sally Car",
-                Description = "Porche did good",
+                Title = "911 Sally Special",
+                Description = "Based on a 2002 Porsche 911 Carrera GTS, the most distinctive feature of the car is its “Sally Blue Metallic” exterior paint color, made exclusively for the one-of-one vehicle. Additional exclusive features of the Sally Special include a “Carrera” designation on the vehicle’s rear and a set of custom five-spoke 911 Turbo wheels inspired by those of the vehicle’s namesake.",
                 Image= "https://media.autoexpress.co.uk/image/private/s--8Hv5ZbZt--/v1661262351/evo/2022/08/Porsche%20911%20Sally%20Carrera%20Special%20Edition%20high%20res-2.jpg",
                 DateCreated = new DateTime(2023, 02, 27)
             },
@@ -55,9 +56,9 @@ namespace BlazorApp1.Server.Data
             {
                 Id = 4,
                 CategoryId = 3,
-                Title = "RC Car",
-                Description = "Helped Woody get onto the moving van",
-                Image= "https://cdn.shopify.com/s/files/1/2278/2841/products/HOW-DIES-RETO-ASST-fyp68-2_1024x1024@2x.jpg?v=1592146087",
+                Title = "The Mystery Machine",
+                Description = "The Chevrolet Van was a series of vans introduced for the 1964 model year. The Chevrolet Van succeeded the Chevrolet Greenbrier, and was launched with the G-10 half-ton variant. A 'Sportvan' was later added to the range that included integrated windows. The first two generations of van were built with a front mid engine layout, but from 1971 onwards, the engine was a front mounted unit. A wide range of engines have been fitted to the Chevrolet Van, including inline four, V6, and V8 units. The Van was configurable for a variety of uses, including passenger, cargo, and bus versions. Production of the Chevrolet Van ended in 1995, and the model was replaced by the Chevrolet Express.",
+                Image= "https://i.ytimg.com/vi/ArKckzLPM0M/maxresdefault.jpg",
                 DateCreated = new DateTime(2023, 02, 27)
             });
 

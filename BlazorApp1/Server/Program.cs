@@ -6,10 +6,11 @@ using Microsoft.EntityFrameworkCore;
 using BlazorApp1.Server.Data;
 using BlazorApp1.Server.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using BlazorWasmAuthenticationAndAuthorization.Server.Authentication;
+using BlazorApp1.Server.Services.UserService;
+using BlazorApp1.Server.Services.UserFileService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserFileService, UserFileService>();
 builder.Services.AddDbContext<DataContext>(options =>
 {
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
