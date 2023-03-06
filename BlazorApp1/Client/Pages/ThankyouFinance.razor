@@ -1,7 +1,34 @@
 ﻿@page "/thankyou/finance"
+@inject ICartService CartService
 
-<h3>ThankyouFinance</h3>
+<PageTitle>FinanceThankYou</PageTitle>
+
+<h1>Thank you!</h1>
+<div>
+    @foreach (var item in cartItems)
+    {
+        <div class="item-container">
+            <div class="item-image-wrapper"><img src="@item.Image" class="item-image" /></div>
+            <div class="item-name">
+                <h5>Congratulations on your @item.ProductTitle purchase for £@item.Price!</h5>
+                <p>
+                    Due to your choice of financing, you will need to go to your nearest dealer which will be shown below in order to confirm your purchase and the period of time you want to finance your chosen car for.
+                </p>
+                <br />
+                <h3>Thank you again for choosing Global Motors</h3>
+            </div>
+        </div>
+    }
+    <div style="text-align:center;">
+        <img src="map.png" />
+    </div>
+</div>
 
 @code {
+    List<CartItem> cartItems = new List<CartItem>();
 
+    protected override async Task OnInitializedAsync()
+    {
+        cartItems = await CartService.GetCartItems();
+    }
 }

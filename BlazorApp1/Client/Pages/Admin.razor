@@ -6,6 +6,7 @@
 @inject AuthenticationStateProvider authenticationStateProvider
 @inject NavigationManager navManager
 @inject HttpClient Http
+@inject IProductService ProductService
 
 <PageTitle>Admin module</PageTitle>
 
@@ -46,6 +47,32 @@ else
         </tbody>
     </table>
 }
+
+<table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>EditionId</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in ProductService.Products)
+             {
+                    @foreach (var variant in product.Variants)
+                    {
+                    <tr>
+                        <td>@product.Id</td>
+                        <td>@product.Title</td>
+                        <td>@variant.EditionId</td>
+                        <td>@variant.Quantity</td>
+                    </tr>
+                    }
+                
+              }
+        </tbody>
+</table>
 
 @code {
     private UserDetails[]? userdetails;
