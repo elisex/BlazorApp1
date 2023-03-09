@@ -9,7 +9,8 @@
             _userAccountList = new List<UserAccount>
             {
                 new UserAccount{ UserName = "admin", Password = "admin", Role = "Administrator" },
-                new UserAccount{ UserName = "user", Password = "user", Role = "User" }
+                new UserAccount{ UserName = "user1", Password = "user1", Role = "User" },
+                new UserAccount{ UserName = "user2", Password = "user2", Role = "User" }
             };
         }
 
